@@ -30,7 +30,9 @@ public class KHOI_11 extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        Thoat = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -56,14 +58,18 @@ public class KHOI_11 extends javax.swing.JFrame {
         ));
         jScrollPane8.setViewportView(jTable2);
 
-        Thoat.setText("Thoát");
-        Thoat.addActionListener(new java.awt.event.ActionListener() {
+        jButton10.setText("Sửa");
+
+        jButton12.setText("Lưu");
+
+        jButton6.setText("Thoát");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ThoatActionPerformed(evt);
+                jButton6ActionPerformed(evt);
             }
         });
 
-        jButton11.setText("Thêm");
+        jButton11.setText("Xem Trước");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("     Danh Sách Học Sinh Khối 11");
@@ -94,10 +100,13 @@ public class KHOI_11 extends javax.swing.JFrame {
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(139, 139, 139))
+                                .addGap(56, 56, 56)
+                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Thoat, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                            .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -113,12 +122,15 @@ public class KHOI_11 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton10)
+                        .addComponent(jButton12))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Thoat)
+                    .addComponent(jButton6)
                     .addComponent(jButton11, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -127,9 +139,9 @@ public class KHOI_11 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThoatActionPerformed
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ThoatActionPerformed
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,8 +179,10 @@ public class KHOI_11 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Thoat;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;

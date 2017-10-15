@@ -302,5 +302,150 @@ public class DbConnect {
     }
     //KET THUC VIET HAM CHO Thaydoisiso_QD
     
+    //VIET HAM CHO themhskhoi10
+    public int HS10_Insert (String[] stringSQL){
+        int row=0;
+        String insert ="INSERT INTO CTLOP (MAHS,MALOP) VALUES(?,?)";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareCall(insert);
+            ps.setString(1,stringSQL[0]);
+            ps.setString(2,stringSQL[1]);
+            
+            row = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
     
+    public int HS10_Update (String[] stringSQL){
+        int row=0;
+        String insert ="UPDATE CTLOP SET MALOP=? WHERE MAHS=?";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareCall(insert);
+            ps.setString(1,stringSQL[0]);
+            ps.setString(2,stringSQL[1]);
+            
+            row = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+    
+    public int HS10_Delete (String[] stringSQL){
+        int row=0;
+        String insert = "DELETE FROM CTLOP WHERE MAHS=?";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareCall(insert);
+            ps.setString(1,stringSQL[0]);
+            
+            row = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+    //KET THUC VIET HAM CHO themhskhoi10
+    
+    //VIET HAM CHO themhskhoi11
+    public int HS11_Insert (String[] stringSQL){
+        int row=0;
+        String insert ="INSERT INTO CTLOP (MAHS,MALOP) VALUES(?,?)";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareCall(insert);
+            ps.setString(1,stringSQL[0]);
+            ps.setString(2,stringSQL[1]);
+            
+            row = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+    
+    public int HS11_Update (String[] stringSQL){
+        int row=0;
+        String insert ="UPDATE CTLOP SET MALOP=? WHERE MAHS=?";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareCall(insert);
+            ps.setString(1,stringSQL[0]);
+            ps.setString(2,stringSQL[1]);
+            
+            row = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+    
+    public int HS11_Delete (String[] stringSQL){
+        int row=0;
+        String insert = "DELETE FROM CTLOP WHERE MAHS=?";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareCall(insert);
+            ps.setString(1,stringSQL[0]);
+            
+            row = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+    //KET THUC VIET HAM CHO themhskhoi11
+    
+    //VIET HAM CHO themhskhoi12
+    public int HS12_Insert (String[] stringSQL){
+        int row=0;
+        String insert ="INSERT INTO CTLOP (MAHS,MALOP) VALUES(?,?)";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareCall(insert);
+            ps.setString(1,stringSQL[0]);
+            ps.setString(2,stringSQL[1]);
+            
+            row = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+    
+    public int HS12_Update (String[] stringSQL){
+        int row=0;
+        String insert ="UPDATE CTLOP SET MALOP=? WHERE MAHS=?";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareCall(insert);
+            ps.setString(1,stringSQL[0]);
+            ps.setString(2,stringSQL[1]);
+            
+            row = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+    
+    public int HS12_Delete (String[] stringSQL){
+        int row=0;
+        String insert = "DELETE FROM CTLOP WHERE MAHS=?";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareCall(insert);
+            ps.setString(1,stringSQL[0]);
+            
+            row = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+    //KET THUC VIET HAM CHO themhskhoi12
 }

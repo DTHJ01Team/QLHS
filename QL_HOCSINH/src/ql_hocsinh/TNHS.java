@@ -117,10 +117,10 @@ public class TNHS extends javax.swing.JInternalFrame {
         
         int insert = con.HOCSINH_Insert(stringSQL);
         if(insert > 0){
-            JOptionPane.showMessageDialog(this,"Them thanh cong!");
+            JOptionPane.showMessageDialog(this,"Thêm học sinh thành công!");
         }
         else {
-            JOptionPane.showMessageDialog(this,"Them khong thanh cong!");
+            JOptionPane.showMessageDialog(this,"Thêm không thành công!");
         }
         showData();
         ClearText();

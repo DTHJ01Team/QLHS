@@ -33,6 +33,7 @@ public class TNHS extends javax.swing.JInternalFrame {
         showData();
         ClearText();
         HideTextBox(false);
+        ShowTT();
     }
     public void HideTextBox (boolean a){
         jText_MAHS.setEnabled(a);
@@ -96,15 +97,20 @@ public class TNHS extends javax.swing.JInternalFrame {
             Logger.getLogger(MainTheme.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void ShowTT (){
+        jLabel_tt.setText("Hiện có "+jTable1.getRowCount()+" học sinh!");
+    }
+    
     public void insertData (){
         String GioiTinh = "";
-        ButtonModel bm = buttonGroup1.getSelection();
         if(jRadio_Nam.isSelected()){
             GioiTinh = jRadio_Nam.getText();
+            jRadio_Nu.setSelected(false);
         }
         else{
             GioiTinh = jRadio_Nu.getText();
-        
+            jRadio_Nam.setSelected(false);
         }
         String[] stringSQL = {jText_MAHS.getText(),jText_Ten.getText(),jText_Ngay.getText(),GioiTinh,
                               jText_Email.getText(),jText_Dia.getText()};
@@ -122,7 +128,6 @@ public class TNHS extends javax.swing.JInternalFrame {
     
     public void updateData (){
         String GioiTinh = "";
-        ButtonModel bm = buttonGroup1.getSelection();
         if(jRadio_Nam.isSelected()){
             GioiTinh = jRadio_Nam.getText();
         }
@@ -207,6 +212,7 @@ public class TNHS extends javax.swing.JInternalFrame {
         jRadio_Nu = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
         jText_MAHS = new javax.swing.JTextField();
+        jLabel_tt = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Tiếp Nhận Thông Tin\n");
@@ -308,6 +314,9 @@ public class TNHS extends javax.swing.JInternalFrame {
         jText_MAHS.setMinimumSize(new java.awt.Dimension(6, 25));
         jText_MAHS.setPreferredSize(new java.awt.Dimension(6, 25));
 
+        jLabel_tt.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel_tt.setText("jLabel7");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -315,32 +324,32 @@ public class TNHS extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jScrollPane2))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
+                                            .addGap(42, 42, 42)
+                                            .addComponent(jText_MAHS, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(210, 210, 210)
+                                .addComponent(jbtn_them)
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jScrollPane2))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(42, 42, 42)
-                                    .addComponent(jText_MAHS, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(jbtn_them)
+                                .addComponent(jbtn_Sua, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jbtn_Sua, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -358,18 +367,20 @@ public class TNHS extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(3, 3, 3))))
-                        .addGap(41, 41, 41))
+                                    .addGap(3, 3, 3)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbtn_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtn_Luu, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbtn_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtn_Luu, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap()
+                        .addComponent(jLabel_tt)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -394,7 +405,7 @@ public class TNHS extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtn_them)
                     .addComponent(jbtn_Sua)
@@ -402,7 +413,9 @@ public class TNHS extends javax.swing.JInternalFrame {
                     .addComponent(jbtn_Xoa))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel_tt)
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -484,6 +497,7 @@ public class TNHS extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel_tt;
     private javax.swing.JRadioButton jRadio_Nam;
     private javax.swing.JRadioButton jRadio_Nu;
     private javax.swing.JScrollPane jScrollPane2;

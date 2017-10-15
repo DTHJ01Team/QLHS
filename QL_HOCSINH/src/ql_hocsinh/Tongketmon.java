@@ -36,7 +36,6 @@ public class Tongketmon extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tổng kết môn");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N

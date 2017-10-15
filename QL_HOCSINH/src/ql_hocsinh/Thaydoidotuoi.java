@@ -5,19 +5,68 @@
  */
 package ql_hocsinh;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HUYNH MINH
  */
 public class Thaydoidotuoi extends javax.swing.JFrame {
-
+    DbConnect con;
+    int flag;
     /**
      * Creates new form Thaydoidotuoi
      */
     public Thaydoidotuoi() {
         initComponents();
+        con = new DbConnect();
+        LoadTuoi();
+        jText_td.setEnabled(false);
+        jText_tt.setEnabled(false);
     }
-
+    
+    public void LoadTuoi (){
+        try{
+            ResultSet rs = con.getData("select * from QUYDINH where MAQD like'TMIN'");
+            while (rs.next()){
+                jText_tt.setText(rs.getString("GiaTriQD"));
+            }
+            ResultSet rss = con.getData("select * from QUYDINH where MAQD like'TMAX'");
+            while (rss.next()){
+                jText_td.setText(rss.getString("GiaTriQD"));
+            }
+        }
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e, "Thông báo lỗi",1);
+        }
+    }
+    
+    public void TMIN_UpdateData (){
+        String[] stringSQL = {jText_tt.getText()};
+        
+        int insert = con.TuoiMin_Update(stringSQL);
+        if(insert > 0){
+            JOptionPane.showMessageDialog(this,"Sửa thành công!");
+        }
+        else {
+            JOptionPane.showMessageDialog(this,"Sửa không thành công!");
+        }
+    }
+    
+    public void TMAX_UpdateData (){
+        String[] stringSQL = {jText_td.getText()};
+        
+        int insert = con.TuoiMax_Update(stringSQL);
+        if(insert > 0){
+            JOptionPane.showMessageDialog(this,"Sửa thành công!");
+        }
+        else {
+            JOptionPane.showMessageDialog(this,"Sửa không thành công!");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,12 +79,11 @@ public class Thaydoidotuoi extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jbtn_sua = new javax.swing.JButton();
+        jbtn_luu = new javax.swing.JButton();
+        jText_tt = new javax.swing.JTextField();
+        jText_td = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Thay đổi độ tuổi");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -47,18 +95,28 @@ public class Thaydoidotuoi extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Tuổi tối đa");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton1.setText("Xác nhận");
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton2.setText("Thoát");
-
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_sua.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jbtn_sua.setText("Sửa");
+        jbtn_sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jbtn_suaActionPerformed(evt);
+            }
+        });
+
+        jbtn_luu.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jbtn_luu.setText("Lưu");
+        jbtn_luu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_luuActionPerformed(evt);
+            }
+        });
+
+        jText_tt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jText_td.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jText_td.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jText_tdActionPerformed(evt);
             }
         });
 
@@ -66,53 +124,75 @@ public class Thaydoidotuoi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 27, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jText_tt, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jText_td, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jLabel1)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addGap(52, 52, 52)
+                        .addComponent(jbtn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtn_luu, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jText_tt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                    .addComponent(jText_td, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(jbtn_sua)
+                    .addComponent(jbtn_luu))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jText_tdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_tdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jText_tdActionPerformed
+
+    private void jbtn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_suaActionPerformed
+        // TODO add your handling code here:
+        jText_tt.setEnabled(true);
+        jText_td.setEnabled(true);
+        jbtn_luu.setEnabled(true);
+        flag = 1;
+        jbtn_sua.setEnabled(false);
+    }//GEN-LAST:event_jbtn_suaActionPerformed
+
+    private void jbtn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_luuActionPerformed
+        // TODO add your handling code here:
+        jText_tt.setEnabled(false);
+        jText_td.setEnabled(false);
+        if(flag == 1){
+            TMIN_UpdateData();
+            TMAX_UpdateData();                
+            jbtn_sua.setEnabled(true);
+        }
+        jbtn_luu.setEnabled(false);
+    }//GEN-LAST:event_jbtn_luuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,12 +230,12 @@ public class Thaydoidotuoi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jText_td;
+    private javax.swing.JTextField jText_tt;
+    private javax.swing.JButton jbtn_luu;
+    private javax.swing.JButton jbtn_sua;
     // End of variables declaration//GEN-END:variables
 }

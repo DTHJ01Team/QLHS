@@ -134,7 +134,7 @@ public class Thaydoisiso_QD extends javax.swing.JFrame {
         // TODO add your handling code here:
         jText_sl.setEnabled(false);
         if(flag == 1){
-            updateData();            
+            updateData();
             jbtn_sua.setEnabled(true);
         }
         jbtn_luu.setEnabled(false);

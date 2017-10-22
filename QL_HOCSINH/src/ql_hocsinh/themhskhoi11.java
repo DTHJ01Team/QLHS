@@ -69,7 +69,7 @@ public class themhskhoi11 extends javax.swing.JFrame {
     public void InsertData(){ 
         String[] stringSQL = {jText_mhs.getText(),jComboBox1.getSelectedItem().toString()};
         
-        int insert = con.HS11_Insert(stringSQL);
+        int insert = con.HS_Insert(stringSQL);
         if(insert > 0){
             JOptionPane.showMessageDialog(this,"Thêm thành công!");
         }
@@ -82,7 +82,7 @@ public class themhskhoi11 extends javax.swing.JFrame {
     public void updateData (){
         String[] stringSQL = {jComboBox1.getSelectedItem().toString(),jText_mhs.getText()};
         
-        int update = con.HS11_Update(stringSQL);
+        int update = con.HS_Update(stringSQL);
         if(update > 0){
             JOptionPane.showMessageDialog(this,"Sửa thành công!");
         }
@@ -95,7 +95,7 @@ public class themhskhoi11 extends javax.swing.JFrame {
     public void deleteData (){
         String[] stringSQL = {jText_mhs.getText()};
         
-        int delete = con.HS11_Delete(stringSQL);
+        int delete = con.HS_Delete(stringSQL);
         if(delete > 0){
             JOptionPane.showMessageDialog(this,"Xóa thành công!");
         }

@@ -46,7 +46,7 @@ public class DbConnect {
     //VIET HÀM CHO FORM TIEP NHAN HOC SINH
     public int HOCSINH_Insert (String[] stringSQL){
         int row=0;
-        String insert ="INSERT INTO HOCSINH (MAHS,HoTen,NgaySinh,GioiTinh,Email,DiaChi) VALUES(?,?,?,?,?,?)";
+        String insert ="set dateformat dmy INSERT INTO HOCSINH (MAHS,HoTen,NgaySinh,GioiTinh,Email,DiaChi) VALUES(?,?,?,?,?,?)";
         PreparedStatement ps;
         try {
             ps = con.prepareCall(insert);
@@ -66,7 +66,7 @@ public class DbConnect {
     
     public int HOCSINH_Update (String[] stringSQL){
         int row=0;
-        String insert ="UPDATE HOCSINH SET HoTen=?, NgaySinh=?, GioiTinh=?, Email=?, DiaChi=? WHERE MAHS=?";
+        String insert ="set dateformat dmy UPDATE HOCSINH SET HoTen=?, NgaySinh=?, GioiTinh=?, Email=?, DiaChi=? WHERE MAHS=?";
         PreparedStatement ps;
         try {
             ps = con.prepareCall(insert);
@@ -302,8 +302,8 @@ public class DbConnect {
     }
     //KET THUC VIET HAM CHO Thaydoisiso_QD
     
-    //VIET HAM CHO themhskhoi10
-    public int HS10_Insert (String[] stringSQL){
+    //VIET HAM CHO themhskhoi10-11-12
+    public int HS_Insert (String[] stringSQL){
         int row=0;
         String insert ="INSERT INTO CTLOP (MAHS,MALOP) VALUES(?,?)";
         PreparedStatement ps;
@@ -319,7 +319,7 @@ public class DbConnect {
         return row;
     }
     
-    public int HS10_Update (String[] stringSQL){
+    public int HS_Update (String[] stringSQL){
         int row=0;
         String insert ="UPDATE CTLOP SET MALOP=? WHERE MAHS=?";
         PreparedStatement ps;
@@ -335,7 +335,7 @@ public class DbConnect {
         return row;
     }
     
-    public int HS10_Delete (String[] stringSQL){
+    public int HS_Delete (String[] stringSQL){
         int row=0;
         String insert = "DELETE FROM CTLOP WHERE MAHS=?";
         PreparedStatement ps;
@@ -349,17 +349,20 @@ public class DbConnect {
         }
         return row;
     }
-    //KET THUC VIET HAM CHO themhskhoi10
+    //KET THUC VIET HAM CHO themhskhoi10-11-12
     
-    //VIET HAM CHO themhskhoi11
-    public int HS11_Insert (String[] stringSQL){
+    //BAT DAU VIET HAM CHO NhapDiemMonHoc
+    public int ND_Insert (String[] stringSQL){
         int row=0;
-        String insert ="INSERT INTO CTLOP (MAHS,MALOP) VALUES(?,?)";
+        String insert ="INSERT INTO DIEMKIEMTRA (MAHS,MAMH,MAHK,[15P],[45P]) VALUES(?,?,?,?,?)";
         PreparedStatement ps;
         try {
             ps = con.prepareCall(insert);
             ps.setString(1,stringSQL[0]);
             ps.setString(2,stringSQL[1]);
+            ps.setString(3,stringSQL[2]);
+            ps.setString(4,stringSQL[3]);
+            ps.setString(5,stringSQL[4]);
             
             row = ps.executeUpdate();
         } catch (SQLException ex) {
@@ -368,14 +371,17 @@ public class DbConnect {
         return row;
     }
     
-    public int HS11_Update (String[] stringSQL){
+    public int ND_Update (String[] stringSQL){
         int row=0;
-        String insert ="UPDATE CTLOP SET MALOP=? WHERE MAHS=?";
+        String insert ="UPDATE DIEMKIEMTRA SET [15P]=?, [45P] = ? WHERE MAHS=? and MAMH =? and MAHK=?";
         PreparedStatement ps;
         try {
             ps = con.prepareCall(insert);
             ps.setString(1,stringSQL[0]);
             ps.setString(2,stringSQL[1]);
+            ps.setString(3,stringSQL[2]);
+            ps.setString(4,stringSQL[3]);
+            ps.setString(5,stringSQL[4]);
             
             row = ps.executeUpdate();
         } catch (SQLException ex) {
@@ -384,31 +390,15 @@ public class DbConnect {
         return row;
     }
     
-    public int HS11_Delete (String[] stringSQL){
+    public int ND_Delete (String[] stringSQL){
         int row=0;
-        String insert = "DELETE FROM CTLOP WHERE MAHS=?";
-        PreparedStatement ps;
-        try {
-            ps = con.prepareCall(insert);
-            ps.setString(1,stringSQL[0]);
-            
-            row = ps.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return row;
-    }
-    //KET THUC VIET HAM CHO themhskhoi11
-    
-    //VIET HAM CHO themhskhoi12
-    public int HS12_Insert (String[] stringSQL){
-        int row=0;
-        String insert ="INSERT INTO CTLOP (MAHS,MALOP) VALUES(?,?)";
+        String insert = "DELETE FROM DIEMKIEMTRA WHERE MAHS=? and MAMH=? and MAHK=?";
         PreparedStatement ps;
         try {
             ps = con.prepareCall(insert);
             ps.setString(1,stringSQL[0]);
             ps.setString(2,stringSQL[1]);
+            ps.setString(3,stringSQL[2]);
             
             row = ps.executeUpdate();
         } catch (SQLException ex) {
@@ -417,14 +407,12 @@ public class DbConnect {
         return row;
     }
     
-    public int HS12_Update (String[] stringSQL){
+    public int DTB_Update (String[] stringSQL){
         int row=0;
-        String insert ="UPDATE CTLOP SET MALOP=? WHERE MAHS=?";
+        String insert ="update DIEMKIEMTRA set DTBM = (select (([15P] + [45P]*2)/3))";
         PreparedStatement ps;
         try {
             ps = con.prepareCall(insert);
-            ps.setString(1,stringSQL[0]);
-            ps.setString(2,stringSQL[1]);
             
             row = ps.executeUpdate();
         } catch (SQLException ex) {
@@ -432,20 +420,5 @@ public class DbConnect {
         }
         return row;
     }
-    
-    public int HS12_Delete (String[] stringSQL){
-        int row=0;
-        String insert = "DELETE FROM CTLOP WHERE MAHS=?";
-        PreparedStatement ps;
-        try {
-            ps = con.prepareCall(insert);
-            ps.setString(1,stringSQL[0]);
-            
-            row = ps.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return row;
-    }
-    //KET THUC VIET HAM CHO themhskhoi12
+    //KET THUC VIET HAM CHO NhapDiemMonHoc
 }

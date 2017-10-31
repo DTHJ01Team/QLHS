@@ -421,4 +421,55 @@ public class DbConnect {
         return row;
     }
     //KET THUC VIET HAM CHO NhapDiemMonHoc
+    
+    
+    //BAT DAU VIET HAM CHO TinhDiemHocKy
+    public int DHK_Insert (String[] stringSQL){
+        int row=0;
+        String insert ="INSERT INTO DIEMHOCKY (MAHS,MALOP,MAHK) VALUES(?,?,?)";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareCall(insert);
+            ps.setString(1,stringSQL[0]);
+            ps.setString(2,stringSQL[1]);
+            ps.setString(3,stringSQL[2]);
+            
+            row = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+    
+    public int DHK_Delete (String[] stringSQL){
+        int row=0;
+        String insert = "DELETE FROM DIEMHOCKY WHERE MAHS=? and MALOP=? and MAHK=?";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareCall(insert);
+            ps.setString(1,stringSQL[0]);
+            ps.setString(2,stringSQL[1]);
+            ps.setString(3,stringSQL[2]);
+            
+            row = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+    
+    public int DTBHK_Update (String[] stringSQL){
+        int row=0;
+        String insert ="update DIEMHOCKY set DTBHK = (select CONVERT(decimal(5,2),sum(DTBM)/count(MAHS)) from DIEMKIEMTRA D where D.MAHS = DIEMHOCKY.MAHS and D.MAHK = DIEMHOCKY.MAHK group by MAHS, MAHK)";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareCall(insert);
+            
+            row = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+    //KET THUC VIET HAM TinhDiemHocKy
 }

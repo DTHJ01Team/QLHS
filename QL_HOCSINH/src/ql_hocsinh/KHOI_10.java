@@ -31,7 +31,7 @@ public class KHOI_10 extends javax.swing.JFrame implements ActionListener{
     }
     
     public void showData (){
-        String[] columnNames = {"Họ tên học sinh","Giới tính","Ngày sinh","Địa chỉ"};
+        String[] columnNames = {"Họ tên","Giới tính","Ngày sinh","Địa chỉ"};
         DefaultTableModel model = new DefaultTableModel();
         
         model.setColumnIdentifiers(columnNames);

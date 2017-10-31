@@ -28,6 +28,8 @@ public class NhapDiemMonHoc extends javax.swing.JInternalFrame {
         LoadDataCB();
         jText_ten.setEnabled(false);
         jText_mon.setEnabled(false);
+        jText_d15.setEnabled(false);
+        jText_d45.setEnabled(false);
         UpdateDTB();
         showData();
         ShowTT();
@@ -256,7 +258,7 @@ public class NhapDiemMonHoc extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Họ Tên", "Học kỳ", "Môn học", "Điểm 15'", "Điểm 1 tiết", "Điểm TB"
+                "Họ Tên", "Học kỳ", "Môn học", "Điểm 15'", "Điểm 45'", "Điểm TB"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -477,6 +479,8 @@ public class NhapDiemMonHoc extends javax.swing.JInternalFrame {
         jbtn_them.setEnabled(false);
         jbtn_sua.setEnabled(false);
         jbtn_xoa.setEnabled(false);
+        jText_d15.setEnabled(true);
+        jText_d45.setEnabled(true);
     }//GEN-LAST:event_jbtn_themActionPerformed
 
     private void jbtn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_suaActionPerformed
@@ -486,6 +490,8 @@ public class NhapDiemMonHoc extends javax.swing.JInternalFrame {
         jbtn_them.setEnabled(false);
         jbtn_sua.setEnabled(false);
         jbtn_xoa.setEnabled(false);
+        jText_d15.setEnabled(true);
+        jText_d45.setEnabled(true);
     }//GEN-LAST:event_jbtn_suaActionPerformed
 
     private void jbtn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_xoaActionPerformed
@@ -495,6 +501,7 @@ public class NhapDiemMonHoc extends javax.swing.JInternalFrame {
         jbtn_them.setEnabled(false);
         jbtn_sua.setEnabled(false);
         jbtn_xoa.setEnabled(false);
+        
     }//GEN-LAST:event_jbtn_xoaActionPerformed
 
     private void jbtn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_luuActionPerformed
@@ -520,6 +527,8 @@ public class NhapDiemMonHoc extends javax.swing.JInternalFrame {
         }
         ClearText();
         jbtn_luu.setEnabled(false);
+        jText_d15.setEnabled(false);
+        jText_d45.setEnabled(false);
     }//GEN-LAST:event_jbtn_luuActionPerformed
 
     private void jcb_monItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcb_monItemStateChanged

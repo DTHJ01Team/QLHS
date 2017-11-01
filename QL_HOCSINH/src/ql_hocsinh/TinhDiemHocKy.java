@@ -31,6 +31,7 @@ public class TinhDiemHocKy extends javax.swing.JFrame {
         showData();
         ShowTT();
         LoadTen();
+        jcb_lop.setEnabled(false);
     }
     public void LoadDataCB(){
         try{

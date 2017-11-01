@@ -231,10 +231,25 @@ public class Thaydoisiso extends javax.swing.JFrame implements ActionListener{
         jScrollPane1.setViewportView(jTable1);
 
         jRadio_k10.setText("Khối 10");
+        jRadio_k10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadio_k10MouseClicked(evt);
+            }
+        });
 
         jRadio_k11.setText("Khối 11");
+        jRadio_k11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadio_k11MouseClicked(evt);
+            }
+        });
 
         jRadio_k12.setText("Khối 12");
+        jRadio_k12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadio_k12MouseClicked(evt);
+            }
+        });
 
         jText_ss.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -428,6 +443,27 @@ public class Thaydoisiso extends javax.swing.JFrame implements ActionListener{
         // TODO add your handling code here:
         getselectData();
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jRadio_k10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadio_k10MouseClicked
+        // TODO add your handling code here:
+        jRadio_k10.setSelected(true);
+        jRadio_k11.setSelected(false);
+        jRadio_k12.setSelected(false);
+    }//GEN-LAST:event_jRadio_k10MouseClicked
+
+    private void jRadio_k11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadio_k11MouseClicked
+        // TODO add your handling code here:
+        jRadio_k10.setSelected(false);
+        jRadio_k11.setSelected(true);
+        jRadio_k12.setSelected(false);
+    }//GEN-LAST:event_jRadio_k11MouseClicked
+
+    private void jRadio_k12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadio_k12MouseClicked
+        // TODO add your handling code here:
+        jRadio_k10.setSelected(false);
+        jRadio_k11.setSelected(false);
+        jRadio_k12.setSelected(true);
+    }//GEN-LAST:event_jRadio_k12MouseClicked
 
     /**
      * @param args the command line arguments

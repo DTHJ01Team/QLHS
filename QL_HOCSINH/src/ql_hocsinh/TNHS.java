@@ -5,9 +5,14 @@
  */
 package ql_hocsinh;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Year;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -213,7 +218,7 @@ public class TNHS extends javax.swing.JInternalFrame {
         jText_Email.setText(jTable1.getValueAt(selectRow,4).toString());
         jText_Dia.setText(jTable1.getValueAt(selectRow,5).toString());
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

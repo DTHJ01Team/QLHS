@@ -5,6 +5,13 @@
  */
 package ql_hocsinh;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author HUYNH MINH
@@ -17,11 +24,75 @@ public class Tongketmon extends javax.swing.JFrame {
     public Tongketmon() {
         initComponents();
         con = new DbConnect();
-        
+        LoadDataCB();
+        showData();
+        ShowTT();
+        jTextField_tenmh.setEnabled(false);
     }
     
+    public void LoadDataCB(){
+        try{
+            ResultSet rs = con.getData("SELECT * FROM MONHOC");
+            ResultSet rss = con.getData("SELECT * FROM LOP");
+            while (rs.next()){
+                this.jComboBox_mon.addItem(rs.getString("MAMH"));
+            }
+            while (rss.next()){
+                this.jComboBox_lop.addItem(rss.getString("MALOP"));
+            }
+        }
+        catch (SQLException e){
+            JOptionPane.showMessageDialog(null, e, "Thông báo lỗi",1);
+        }
+    }
     
-
+    public void LoadTen(){
+        try {
+                ResultSet rs = con.getData("SELECT Ten FROM MONHOC WHERE MAMH like N'%" + jComboBox_mon.getSelectedItem().toString() + "%'");
+                while (rs.next()){
+                    jTextField_tenmh.setText(rs.getString("Ten"));
+                }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Thông báo lỗi",1);
+        }
+    }
+    
+    public void showData (){
+        String[] columnNames = {"Lớp","Sỉ số","Số lượng đạt","Tỉ lệ %"};
+        DefaultTableModel model = new DefaultTableModel();
+        
+        model.setColumnIdentifiers(columnNames);
+        jTable1.setModel(model);
+        
+        String Lop ="";
+        String SS ="";
+        String SL = "";
+        String TL = "";
+        
+        ResultSet rs = con.getData("select L.MALOP, L.SL, \n" +
+"[Dat] = (select count(D.MAHS) from DIEMKIEMTRA D, DIEMDATMON DD, CTLOP C where D.MAMH = DD.MAMH and D.MAHS = C.MAHS and D.DTBM>= DD.DiemDat  and D.MAMH like '%"+jComboBox_mon.getSelectedItem().toString()+"%' and C.MALOP like '%"+jComboBox_lop.getSelectedItem()+"%'),\n" +
+"[TL] = convert(varchar(50),((select count(D.MAHS) from DIEMKIEMTRA D, DIEMDATMON DD, CTLOP C where D.MAMH = DD.MAMH and D.MAHS = C.MAHS and D.DTBM>= DD.DiemDat and D.MAMH like '%"+jComboBox_mon.getSelectedItem().toString()+"%' and C.MALOP like '%"+jComboBox_lop.getSelectedItem()+"%') / convert(float,L.SL)*100)) + '%'\n" +
+"from LOP L, DIEMKIEMTRA D, CTLOP C\n" +
+"where L.MALOP = C.MALOP and C.MAHS = D.MAHS and C.MALOP like '%"+jComboBox_lop.getSelectedItem()+"%'\n" +
+"group by L.MALOP, L.SL");   
+        try {
+            while (rs.next()){
+                Lop = rs.getString("MALOP");
+                SS = rs.getString("SL");
+                SL = rs.getString("Dat");
+                TL = rs.getString("TL");
+                
+                model.addRow(new Object[] {Lop,SS,SL,TL});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTheme.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
+    public void ShowTT (){
+        jLabel_tt.setText("Lớp đang chọn là: "+jComboBox_lop.getSelectedItem().toString()+"!");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,16 +103,14 @@ public class Tongketmon extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jRadioButton_hk1 = new javax.swing.JRadioButton();
-        jRadioButton_hk2 = new javax.swing.JRadioButton();
         jComboBox_mon = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox_lop = new javax.swing.JComboBox<>();
         jLabel_tt = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox_lop = new javax.swing.JComboBox<>();
+        jTextField_tenmh = new javax.swing.JTextField();
 
         setTitle("Tổng kết môn");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -49,24 +118,18 @@ public class Tongketmon extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Tổng kết môn");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Học kỳ");
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Môn");
 
-        jRadioButton_hk1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButton_hk1.setText("HKI");
-
-        jRadioButton_hk2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButton_hk2.setText("HKII");
-
         jComboBox_mon.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jComboBox_mon.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox_monItemStateChanged(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
@@ -76,63 +139,64 @@ public class Tongketmon extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel4.setText("Lớp");
-
+        jLabel_tt.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel_tt.setText("jLabel5");
+
+        jLabel2.setText("Lớp");
+
+        jComboBox_lop.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox_lopItemStateChanged(evt);
+            }
+        });
+        jComboBox_lop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox_lopMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox_lop, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox_mon, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel_tt)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel_tt)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addGap(146, 146, 146))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton_hk1)
-                        .addGap(10, 10, 10)
-                        .addComponent(jRadioButton_hk2)
-                        .addGap(113, 113, 113))))
+                        .addGap(146, 146, 146))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox_lop, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField_tenmh, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox_mon, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboBox_lop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox_mon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
                     .addComponent(jLabel2)
-                    .addComponent(jRadioButton_hk1)
-                    .addComponent(jRadioButton_hk2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_lop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_tenmh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_mon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel_tt)
                 .addGap(4, 4, 4))
@@ -140,6 +204,21 @@ public class Tongketmon extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox_monItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_monItemStateChanged
+        // TODO add your handling code here:
+        showData();
+        LoadTen();
+    }//GEN-LAST:event_jComboBox_monItemStateChanged
+
+    private void jComboBox_lopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox_lopMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_lopMouseClicked
+
+    private void jComboBox_lopItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_lopItemStateChanged
+        // TODO add your handling code here:
+        ShowTT();
+    }//GEN-LAST:event_jComboBox_lopItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -182,11 +261,9 @@ public class Tongketmon extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_tt;
-    private javax.swing.JRadioButton jRadioButton_hk1;
-    private javax.swing.JRadioButton jRadioButton_hk2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField_tenmh;
     // End of variables declaration//GEN-END:variables
 }

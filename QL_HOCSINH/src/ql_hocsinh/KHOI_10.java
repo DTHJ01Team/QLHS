@@ -107,8 +107,6 @@ public class KHOI_10 extends javax.swing.JFrame implements ActionListener{
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel_tt = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jLabel2.setText("Lớp");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(

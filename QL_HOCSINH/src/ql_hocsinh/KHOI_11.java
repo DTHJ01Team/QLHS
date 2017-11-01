@@ -106,8 +106,6 @@ public class KHOI_11 extends javax.swing.JFrame implements ActionListener{
         jText_sl = new javax.swing.JTextPane();
         jLabel_tt = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jLabel7.setText("Sỉ số");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(

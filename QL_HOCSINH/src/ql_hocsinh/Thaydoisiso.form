@@ -204,16 +204,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Kh&#x1ed1;i 10"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadio_k10MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadio_k11">
       <Properties>
         <Property name="text" type="java.lang.String" value="Kh&#x1ed1;i 11"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadio_k11MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadio_k12">
       <Properties>
         <Property name="text" type="java.lang.String" value="Kh&#x1ed1;i 12"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadio_k12MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jText_lop">
     </Component>

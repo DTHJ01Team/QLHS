@@ -25,7 +25,7 @@ public class themhskhoi12 extends javax.swing.JFrame {
         con = new DbConnect();
         showData();
         LoadDataCB();
-        jText_mhs.setEnabled(false);
+        jComboBox_ma.setEnabled(false);
     }
     
     public void showData (){
@@ -57,9 +57,13 @@ public class themhskhoi12 extends javax.swing.JFrame {
     public void LoadDataCB(){
         try{
             ResultSet rs = con.getData("SELECT * from LOP WHERE MALOP LIKE '12%'");
+            ResultSet rss = con.getData("SELECT * from HOCSINH");
             while (rs.next()){
                 this.jComboBox1.addItem(rs.getString("MALOP"));
-            } 
+            }
+            while (rss.next()){
+                this.jComboBox_ma.addItem(rss.getString("MAHS"));
+            }
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, e, "Thông báo lỗi",1);
@@ -67,7 +71,7 @@ public class themhskhoi12 extends javax.swing.JFrame {
     }
     
     public void InsertData(){ 
-        String[] stringSQL = {jText_mhs.getText(),jComboBox1.getSelectedItem().toString()};
+        String[] stringSQL = {jComboBox_ma.getSelectedItem().toString(),jComboBox1.getSelectedItem().toString()};
         
         int insert = con.HS_Insert(stringSQL);
         if(insert > 0){
@@ -80,7 +84,7 @@ public class themhskhoi12 extends javax.swing.JFrame {
     }
     
     public void updateData (){
-        String[] stringSQL = {jComboBox1.getSelectedItem().toString(),jText_mhs.getText()};
+        String[] stringSQL = {jComboBox1.getSelectedItem().toString(),jComboBox_ma.getSelectedItem().toString()};
         
         int update = con.HS_Update(stringSQL);
         if(update > 0){
@@ -93,7 +97,7 @@ public class themhskhoi12 extends javax.swing.JFrame {
     }
     
     public void deleteData (){
-        String[] stringSQL = {jText_mhs.getText()};
+        String[] stringSQL = {jComboBox_ma.getSelectedItem().toString()};
         
         int delete = con.HS_Delete(stringSQL);
         if(delete > 0){
@@ -107,12 +111,12 @@ public class themhskhoi12 extends javax.swing.JFrame {
     
     public void getselectData(){
         int selectRow = jTable3.getSelectedRow();
-        jText_mhs.setText(jTable3.getValueAt(selectRow,0).toString());
+        jComboBox_ma.setSelectedItem(jTable3.getValueAt(selectRow,0).toString());
         jComboBox1.setSelectedItem(jTable3.getValueAt(selectRow,2));
     }
     
     public void ClearText (){
-        jText_mhs.setText("");
+        jComboBox_ma.setSelectedIndex(0);
         jComboBox1.setSelectedIndex(0);
     }
 
@@ -125,7 +129,6 @@ public class themhskhoi12 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jText_mhs = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -136,6 +139,7 @@ public class themhskhoi12 extends javax.swing.JFrame {
         jbtn_sua = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jComboBox_ma = new javax.swing.JComboBox<>();
 
         jLabel3.setText("Lớp");
 
@@ -198,26 +202,27 @@ public class themhskhoi12 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jText_mhs, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(jbtn_them)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBox_ma, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbtn_them)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jbtn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtn_luu, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbtn_luu, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -227,13 +232,13 @@ public class themhskhoi12 extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jText_mhs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBox_ma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtn_luu)
                     .addComponent(jbtn_xoa)
@@ -272,14 +277,14 @@ public class themhskhoi12 extends javax.swing.JFrame {
             jbtn_sua.setEnabled(true);
         }
         ClearText();
-        jText_mhs.setEnabled(false);
+        jComboBox_ma.setEnabled(false);
         jbtn_luu.setEnabled(false);
     }//GEN-LAST:event_jbtn_luuActionPerformed
 
     private void jbtn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_themActionPerformed
         // TODO add your handling code here:
         ClearText();
-        jText_mhs.setEnabled(true);
+        jComboBox_ma.setEnabled(true);
         jbtn_luu.setEnabled(true);
         flag = 1;
         jbtn_them.setEnabled(false);
@@ -289,7 +294,7 @@ public class themhskhoi12 extends javax.swing.JFrame {
 
     private void jbtn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_xoaActionPerformed
         // TODO add your handling code here:
-        jText_mhs.setEnabled(true);
+        jComboBox_ma.setEnabled(true);
         jbtn_luu.setEnabled(true);
         flag = 3;
         jbtn_them.setEnabled(false);
@@ -299,7 +304,7 @@ public class themhskhoi12 extends javax.swing.JFrame {
 
     private void jbtn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_suaActionPerformed
         // TODO add your handling code here:
-        jText_mhs.setEnabled(true);
+        jComboBox_ma.setEnabled(true);
         jbtn_luu.setEnabled(true);
         flag = 2;
         jbtn_them.setEnabled(false);
@@ -344,12 +349,12 @@ public class themhskhoi12 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox_ma;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jText_mhs;
     private javax.swing.JButton jbtn_luu;
     private javax.swing.JButton jbtn_sua;
     private javax.swing.JButton jbtn_them;

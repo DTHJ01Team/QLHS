@@ -5,19 +5,77 @@
  */
 package ql_hocsinh;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author HUYNH MINH
  */
 public class Tongkethocky extends javax.swing.JFrame {
-
+    DbConnect con;
     /**
      * Creates new form Tongkethocky
      */
     public Tongkethocky() {
         initComponents();
+        con = new DbConnect();
+        LoadDataCB();
+        showData();
     }
-
+    
+    public void LoadDataCB(){
+        try{
+            ResultSet rss = con.getData("SELECT * FROM LOP");
+            while (rss.next()){
+                this.jComboBox_lop.addItem(rss.getString("MALOP"));
+            }
+        }
+        catch (SQLException e){
+            JOptionPane.showMessageDialog(null, e, "Thông báo lỗi",1);
+        }
+    }
+    
+    public void showData (){
+        String[] columnNames = {"Lớp","Sỉ số","Số lượng đạt","Tỉ lệ %"};
+        DefaultTableModel model = new DefaultTableModel();
+        
+        model.setColumnIdentifiers(columnNames);
+        jTable1.setModel(model);
+        
+        String Lop ="";
+        String SS ="";
+        String SL = "";
+        String TL = "";
+        
+        ResultSet rs = con.getData("select L.MALOP, L.SL,\n" +
+    "[Dat] = (select count(D.MAHS) from  DIEMHOCKY D, QUYDINH Q where Q.MAQD like 'DIDA' and D.MALOP like '%"+jComboBox_lop.getSelectedItem()+"%' group by Q.GiaTriQD having sum(DTBHK)/2 > Q.GiaTriQD)/2,\n" +
+    "[TL] = convert(varchar(50),((select count(D.MAHS) from  DIEMHOCKY D, QUYDINH Q where Q.MAQD like 'DIDA' and D.MALOP like '%"+jComboBox_lop.getSelectedItem()+"%' group by Q.GiaTriQD having sum(DTBHK)/2 > Q.GiaTriQD)/2) / convert(float,L.SL)*100) + '%'\n" +
+    "from LOP L, DIEMHOCKY D, CTLOP C\n" +
+    "where L.MALOP = D.MALOP and D.MAHS = C.MAHS and C.MALOP like '%"+jComboBox_lop.getSelectedItem()+"%'\n" +
+    "group by L.MALOP, L.SL");   
+        try {
+            while (rs.next()){
+                Lop = rs.getString("MALOP");
+                SS = rs.getString("SL");
+                SL = rs.getString("Dat");
+                TL = rs.getString("TL");
+                
+                model.addRow(new Object[] {Lop,SS,SL,TL});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTheme.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
+    public void ShowTT (){
+        jLabel_tt.setText("Lớp đang chọn là: "+jComboBox_lop.getSelectedItem().toString()+"!");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,32 +86,19 @@ public class Tongkethocky extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jRadioButton_hk1 = new javax.swing.JRadioButton();
-        jRadioButton_hk2 = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jComboBox_lop = new javax.swing.JComboBox<>();
+        jLabel_tt = new javax.swing.JLabel();
 
         setTitle("Tổng kết học kỳ");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Tổng kết học kỳ");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Học kỳ");
-
-        jRadioButton_hk1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButton_hk1.setText("HKI");
-
-        jRadioButton_hk2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButton_hk2.setText("HKII");
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
@@ -66,48 +111,59 @@ public class Tongkethocky extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Lớp");
 
+        jComboBox_lop.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox_lopItemStateChanged(evt);
+            }
+        });
+
+        jLabel_tt.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel_tt.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(133, 133, 133))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox_lop, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jRadioButton_hk1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton_hk2)
-                .addGap(25, 25, 25))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel_tt)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboBox_lop, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1))
+                        .addGap(133, 133, 133))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox_lop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jRadioButton_hk1)
-                        .addComponent(jRadioButton_hk2)))
-                .addGap(47, 47, 47)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_tt, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox_lopItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_lopItemStateChanged
+        // TODO add your handling code here:
+        showData();
+        ShowTT();
+    }//GEN-LAST:event_jComboBox_lopItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -147,10 +203,8 @@ public class Tongkethocky extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox_lop;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JRadioButton jRadioButton_hk1;
-    private javax.swing.JRadioButton jRadioButton_hk2;
+    private javax.swing.JLabel jLabel_tt;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

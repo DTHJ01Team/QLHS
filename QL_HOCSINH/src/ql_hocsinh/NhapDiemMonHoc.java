@@ -30,6 +30,7 @@ public class NhapDiemMonHoc extends javax.swing.JInternalFrame {
         jText_mon.setEnabled(false);
         jText_d15.setEnabled(false);
         jText_d45.setEnabled(false);
+        jcb_lop.setEnabled(false);
         UpdateDTB();
         showData();
         ShowTT();

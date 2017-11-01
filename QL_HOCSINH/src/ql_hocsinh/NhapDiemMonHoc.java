@@ -246,6 +246,11 @@ public class NhapDiemMonHoc extends javax.swing.JInternalFrame {
         setClosable(true);
 
         jRadio_hk2.setText("II");
+        jRadio_hk2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadio_hk2MouseClicked(evt);
+            }
+        });
 
         jLabel2.setText("Họ Tên");
 
@@ -300,6 +305,11 @@ public class NhapDiemMonHoc extends javax.swing.JInternalFrame {
         jLabel4.setText("Mã môn");
 
         jRadio_hk1.setText("I");
+        jRadio_hk1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadio_hk1MouseClicked(evt);
+            }
+        });
 
         jLabel7.setText("Điểm 15'");
 
@@ -541,6 +551,18 @@ public class NhapDiemMonHoc extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         getselectData();
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jRadio_hk1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadio_hk1MouseClicked
+        // TODO add your handling code here:
+        jRadio_hk1.setSelected(true);
+        jRadio_hk2.setSelected(false);
+    }//GEN-LAST:event_jRadio_hk1MouseClicked
+
+    private void jRadio_hk2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadio_hk2MouseClicked
+        // TODO add your handling code here:
+        jRadio_hk1.setSelected(false);
+        jRadio_hk2.setSelected(true);
+    }//GEN-LAST:event_jRadio_hk2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

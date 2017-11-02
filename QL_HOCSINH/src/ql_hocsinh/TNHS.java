@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.text.MaskFormatter;
+import Process.checkSymbol;
 
 /**
  *
@@ -518,12 +519,22 @@ public class TNHS extends javax.swing.JInternalFrame {
                 if (this.jText_MAHS.getText().length() > 10)
                     JOptionPane.showMessageDialog(null,"Mã học sinh không vượt quá 10 ký tự!","Thông báo lỗi!", 1);
             else
+                  if(checkSymbol.checkNum(this.jText_MAHS.getText())==false)
+                           JOptionPane.showMessageDialog(null, "Phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
+            else
                     if(this.jText_Ten.getText().length() == 0)
-                        JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
+                                JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
             else
+                         if(checkSymbol.checkSb(this.jText_Ten.getText())==true)
+                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+            else
+                                      if(checkSymbol.checkNum(this.jText_Ten.getText())==true)
+                                            JOptionPane.showMessageDialog(null, "Phát hiện có số-không phải là ký tự!","Thông báo lỗi!", 1);
+            else         
                         if(this.jText_Dia.getText().length() == 0)
-                            JOptionPane.showMessageDialog(null,"Địa chỉ không được để trống!","Thông báo lỗi!", 1);
-            else
+                                    JOptionPane.showMessageDialog(null,"Địa chỉ không được để trống!","Thông báo lỗi!", 1);
+            else                                                                           
+                                    
                 insertData();
             jbtn_them.setEnabled(true);
             jbtn_Xoa.setEnabled(true);
@@ -537,12 +548,21 @@ public class TNHS extends javax.swing.JInternalFrame {
                 if (this.jText_MAHS.getText().length() > 10)
                     JOptionPane.showMessageDialog(null,"Mã học sinh không vượt quá 10 ký tự!","Thông báo lỗi!", 1);
             else
+                  if(checkSymbol.checkNum(this.jText_MAHS.getText())==false)
+                           JOptionPane.showMessageDialog(null, "Phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
+            else
                     if(this.jText_Ten.getText().length() == 0)
-                        JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
+                                JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
             else
-                        if(this.jText_Dia.getText().length() == 0)
-                            JOptionPane.showMessageDialog(null,"Địa chỉ không được để trống!","Thông báo lỗi!", 1);
+                         if(checkSymbol.checkSb(this.jText_Ten.getText())==true)
+                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
             else
+                               if(checkSymbol.checkNum(this.jText_Ten.getText())==true)
+                                            JOptionPane.showMessageDialog(null, "Phát hiện có số-không phải là ký tự!","Thông báo lỗi!", 1);
+            else         
+                                     if(this.jText_Dia.getText().length() == 0)
+                                                JOptionPane.showMessageDialog(null,"Địa chỉ không được để trống!","Thông báo lỗi!", 1);
+            else                            
                 updateData();            
             jbtn_them.setEnabled(true);
             jbtn_Xoa.setEnabled(true);
@@ -555,8 +575,7 @@ public class TNHS extends javax.swing.JInternalFrame {
             {
                 if(JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa?", "Thông báo!", 2)==0)
                     deleteData();
-            }
-          
+            }         
             jbtn_them.setEnabled(true);
             jbtn_Xoa.setEnabled(true);
             jbtn_Sua.setEnabled(true);

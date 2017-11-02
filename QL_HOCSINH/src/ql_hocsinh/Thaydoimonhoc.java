@@ -5,6 +5,7 @@
  */
 package ql_hocsinh;
 
+import Process.checkSymbol;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
@@ -356,18 +357,73 @@ public class Thaydoimonhoc extends javax.swing.JFrame implements ActionListener{
             } else{
                 JOptionPane.showMessageDialog(this,"Vượt quá số lượng môn!");
             }
+            if(this.jText_MM.getText().length() == 0)
+                                JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
+            else                                               
+                         if(checkSymbol.checkSb(this.jText_MM.getText())==true)
+                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+            else
+                              if(this.jText_Ten.getText().length() == 0)
+                                JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
+            else
+                         if(checkSymbol.checkSb(this.jText_Ten.getText())==true)
+                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+            else
+                               if(checkSymbol.checkNum(this.jText_Ten.getText())==true)
+                                            JOptionPane.showMessageDialog(null, "Phát hiện có số-không phải là ký tự!","Thông báo lỗi!", 1);
+            else
+                                    if(this.jText_SL.getText().length() == 0)
+                                JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
+            else
+                         if(checkSymbol.checkSb(this.jText_SL.getText())==true)
+                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+            else
+                             if(checkSymbol.checkNum(this.jText_SL.getText())==false)
+                           JOptionPane.showMessageDialog(null, "Phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
+            else      
+            insertData();
             jbtn_them.setEnabled(true);
             jbtn_xoa.setEnabled(true);
             jbtn_sua.setEnabled(true);
         }
         else if(flag == 2){
+            if(this.jText_MM.getText().length() == 0)
+                                JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
+            else                                               
+                         if(checkSymbol.checkSb(this.jText_MM.getText())==true)
+                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+            else
+                                if(this.jText_Ten.getText().length() == 0)
+                                JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
+            else
+                         if(checkSymbol.checkSb(this.jText_Ten.getText())==true)
+                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+            else
+                               if(checkSymbol.checkNum(this.jText_Ten.getText())==true)
+                                            JOptionPane.showMessageDialog(null, "Phát hiện có số-không phải là ký tự!","Thông báo lỗi!", 1);
+            else
+                                    if(this.jText_SL.getText().length() == 0)
+                                JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
+            else
+                         if(checkSymbol.checkSb(this.jText_SL.getText())==true)
+                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+            else
+                             if(checkSymbol.checkNum(this.jText_SL.getText())==false)
+                           JOptionPane.showMessageDialog(null, "Phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
+            else      
             updateData();            
             jbtn_them.setEnabled(true);
             jbtn_xoa.setEnabled(true);
             jbtn_sua.setEnabled(true);
         }
-        else{
-            deleteData();            
+        else{           
+             if(this.jText_MM.getText().length() == 0)
+                JOptionPane.showMessageDialog(null,"Bạn cần chọn học sinh để xóa","Thông báo lỗi!", 1);
+            else
+            {
+                if(JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa?", "Thông báo!", 2)==0)
+                    deleteData();
+            }         
             jbtn_them.setEnabled(true);
             jbtn_xoa.setEnabled(true);
             jbtn_sua.setEnabled(true);

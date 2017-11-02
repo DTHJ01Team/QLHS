@@ -5,6 +5,7 @@
  */
 package ql_hocsinh;
 
+import Process.checkSymbol;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -181,6 +182,15 @@ public class TraCuuHocSinh extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtn_timActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_timActionPerformed
+         if(this.jTextField_ten.getText().length() == 0)
+                                JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
+            else
+                         if(checkSymbol.checkSb(this.jTextField_ten.getText())==true)
+                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+            else
+                                      if(checkSymbol.checkNum(this.jTextField_ten.getText())==true)
+                                            JOptionPane.showMessageDialog(null, "Phát hiện có số-không phải là ký tự!","Thông báo lỗi!", 1);
+            else                                                
         // TODO add your handling code here:
         ShowTT();
         showData();

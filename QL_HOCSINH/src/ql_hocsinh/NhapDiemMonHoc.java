@@ -525,22 +525,22 @@ public class NhapDiemMonHoc extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if(flag == 1){
             if(this.jText_d15.getText().length() == 0)
-                JOptionPane.showMessageDialog(null," Điểm không được để trống!","Thông báo lỗi!", 1);
+                JOptionPane.showMessageDialog(null,"Điểm 15': không được để trống!","Thông báo lỗi!", 1);
             else               
                   if(checkSymbol.checkNum(this.jText_d15.getText())==false)
-                           JOptionPane.showMessageDialog(null, "Phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
+                           JOptionPane.showMessageDialog(null, "Điểm 15': phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
             else                  
                          if(checkSymbol.checkSb(this.jText_d15.getText())==true)
-                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+                                      JOptionPane.showMessageDialog(null, "Điểm 15': phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
             else
                              if(this.jText_d45.getText().length() == 0)
-                JOptionPane.showMessageDialog(null," Điểm không được để trống!","Thông báo lỗi!", 1);
+                JOptionPane.showMessageDialog(null,"Điểm 45': không được để trống!","Thông báo lỗi!", 1);
             else               
                   if(checkSymbol.checkNum(this.jText_d45.getText())==false)
-                           JOptionPane.showMessageDialog(null, "Phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
+                           JOptionPane.showMessageDialog(null, "Điểm 45': phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
             else                  
                          if(checkSymbol.checkSb(this.jText_d45.getText())==true)
-                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+                                      JOptionPane.showMessageDialog(null, "Điểm 45': phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
             else                             
             InsertData();
             jbtn_them.setEnabled(true);
@@ -549,23 +549,23 @@ public class NhapDiemMonHoc extends javax.swing.JInternalFrame {
         }
         else if(flag == 2){
             if(this.jText_d15.getText().length() == 0)
-                JOptionPane.showMessageDialog(null," Điểm không được để trống!","Thông báo lỗi!", 1);
+                JOptionPane.showMessageDialog(null,"Điểm 15': không được để trống!","Thông báo lỗi!", 1);
             else               
                   if(checkSymbol.checkNum(this.jText_d15.getText())==false)
-                           JOptionPane.showMessageDialog(null, "Phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
+                           JOptionPane.showMessageDialog(null, "Điểm 15': phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
             else                  
                          if(checkSymbol.checkSb(this.jText_d15.getText())==true)
-                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+                                      JOptionPane.showMessageDialog(null, "Điểm 15': phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
             else
                              if(this.jText_d45.getText().length() == 0)
-                JOptionPane.showMessageDialog(null," Điểm không được để trống!","Thông báo lỗi!", 1);
+                JOptionPane.showMessageDialog(null,"Điểm 45': không được để trống!","Thông báo lỗi!", 1);
             else               
                   if(checkSymbol.checkNum(this.jText_d45.getText())==false)
-                           JOptionPane.showMessageDialog(null, "Phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
+                           JOptionPane.showMessageDialog(null, "Điểm 45': phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
             else                  
                          if(checkSymbol.checkSb(this.jText_d45.getText())==true)
-                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
-            else
+                                      JOptionPane.showMessageDialog(null, "Điểm 45': phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+            else     
             updateData();            
             jbtn_them.setEnabled(true);
             jbtn_xoa.setEnabled(true);

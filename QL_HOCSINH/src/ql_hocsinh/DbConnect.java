@@ -23,7 +23,7 @@ public class DbConnect {
     Connection con;
     public DbConnect (){ 
         try {
-            String URL = "jdbc:sqlserver://ANHQUOC-PC\\ANHQUOCPC:1433;databaseName=QL_HOCSINH;user=anhquoc;password=123";
+            String URL = "jdbc:sqlserver://CUONGNGUYEN-PC\\SQLEXPRESS:1433;databaseName=QL_HOCSINH;user=sa;password=123456";
             con = DriverManager.getConnection(URL);
         } catch (SQLException ex) {
             Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);

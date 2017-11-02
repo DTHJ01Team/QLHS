@@ -514,54 +514,77 @@ public class TNHS extends javax.swing.JInternalFrame {
     private void jbtn_LuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_LuuActionPerformed
         if(flag == 1){
             if(this.jText_MAHS.getText().length() == 0)
-                JOptionPane.showMessageDialog(null,"Mã học sinh không được để trống!","Thông báo lỗi!", 1);
+                JOptionPane.showMessageDialog(null,"Mã HS: mã học sinh không được để trống!","Thông báo lỗi!", 1);
             else
                 if (this.jText_MAHS.getText().length() > 10)
-                    JOptionPane.showMessageDialog(null,"Mã học sinh không vượt quá 10 ký tự!","Thông báo lỗi!", 1);
-            else
+                    JOptionPane.showMessageDialog(null,"Mã HS: mã học sinh không vượt quá 10 ký tự!","Thông báo lỗi!", 1);
+            else                   
                   if(checkSymbol.checkNum(this.jText_MAHS.getText())==false)
-                           JOptionPane.showMessageDialog(null, "Phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
+                        JOptionPane.showMessageDialog(null, "Mã HS: phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
             else
-                    if(this.jText_Ten.getText().length() == 0)
-                                JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
+                     if(checkSymbol.checkSb(this.jText_MAHS.getText())==true)
+                           JOptionPane.showMessageDialog(null, "Mã HS: phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
             else
-                         if(checkSymbol.checkSb(this.jText_Ten.getText())==true)
-                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+                        if(this.jText_Ten.getText().length() == 0)
+                              JOptionPane.showMessageDialog(null,"Họ Tên: tên học sinh không được để trống!","Thông báo lỗi!", 1);
             else
-                                      if(checkSymbol.checkNum(this.jText_Ten.getText())==true)
-                                            JOptionPane.showMessageDialog(null, "Phát hiện có số-không phải là ký tự!","Thông báo lỗi!", 1);
-            else         
-                        if(this.jText_Dia.getText().length() == 0)
-                                    JOptionPane.showMessageDialog(null,"Địa chỉ không được để trống!","Thông báo lỗi!", 1);
-            else                                                                           
+                          if(checkSymbol.checkSb(this.jText_Ten.getText())==true)
+                                 JOptionPane.showMessageDialog(null, "Họ Tên: phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+            else
+                             if(checkSymbol.checkNum(this.jText_Ten.getText())==true)
+                                    JOptionPane.showMessageDialog(null, "Họ Tên: phát hiện có số-không phải là ký tự!","Thông báo lỗi!", 1);
+            else
+                                if(checkSymbol.checkSb(this.jText_Ngay.getText())==true)
+                                      JOptionPane.showMessageDialog(null, "Ngày Sinh: phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+            else
+                                    if(this.jText_Ngay.getText().length() == 0)
+                                        JOptionPane.showMessageDialog(null,"Ngày Sinh: ngày sinh không được để trống!","Thông báo lỗi!", 1);
+            else
+                                        if(this.jText_Email.getText().length() == 0)
+                                            JOptionPane.showMessageDialog(null,"Mail không được để trống!","Thông báo lỗi!", 1);
+            else
+                                        if(this.jText_Dia.getText().length() == 0)
+                                              JOptionPane.showMessageDialog(null,"Địa chỉ không được để trống!","Thông báo lỗi!", 1);
+            else                         
                                     
                 insertData();
             jbtn_them.setEnabled(true);
             jbtn_Xoa.setEnabled(true);
-            jbtn_Sua.setEnabled(true);
-            
+            jbtn_Sua.setEnabled(true);            
         }
         else if(flag == 2){
-            if(this.jText_MAHS.getText().length() == 0)
-                JOptionPane.showMessageDialog(null,"Mã học sinh không được để trống!","Thông báo lỗi!", 1);
+                if(this.jText_MAHS.getText().length() == 0)
+                    JOptionPane.showMessageDialog(null,"Mã HS: mã học sinh không được để trống!","Thông báo lỗi!", 1);
             else
-                if (this.jText_MAHS.getText().length() > 10)
-                    JOptionPane.showMessageDialog(null,"Mã học sinh không vượt quá 10 ký tự!","Thông báo lỗi!", 1);
+                  if (this.jText_MAHS.getText().length() > 10)
+                       JOptionPane.showMessageDialog(null,"Mã HS: mã học sinh không vượt quá 10 ký tự!","Thông báo lỗi!", 1);
+            else                   
+                    if(checkSymbol.checkNum(this.jText_MAHS.getText())==false)
+                          JOptionPane.showMessageDialog(null, "Mã HS: phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
             else
-                  if(checkSymbol.checkNum(this.jText_MAHS.getText())==false)
-                           JOptionPane.showMessageDialog(null, "Phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
+                       if(checkSymbol.checkSb(this.jText_MAHS.getText())==true)
+                             JOptionPane.showMessageDialog(null, "Mã HS: phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
             else
-                    if(this.jText_Ten.getText().length() == 0)
-                                JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
+                          if(this.jText_Ten.getText().length() == 0)
+                                JOptionPane.showMessageDialog(null,"Họ Tên: tên học sinh không được để trống!","Thông báo lỗi!", 1);
             else
-                         if(checkSymbol.checkSb(this.jText_Ten.getText())==true)
-                                      JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+                            if(checkSymbol.checkSb(this.jText_Ten.getText())==true)
+                                   JOptionPane.showMessageDialog(null, "Họ Tên: phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
             else
                                if(checkSymbol.checkNum(this.jText_Ten.getText())==true)
-                                            JOptionPane.showMessageDialog(null, "Phát hiện có số-không phải là ký tự!","Thông báo lỗi!", 1);
-            else         
-                                     if(this.jText_Dia.getText().length() == 0)
-                                                JOptionPane.showMessageDialog(null,"Địa chỉ không được để trống!","Thông báo lỗi!", 1);
+                                       JOptionPane.showMessageDialog(null, "Họ Tên: phát hiện có số-không phải là ký tự!","Thông báo lỗi!", 1);
+            else
+                                  if(checkSymbol.checkSb(this.jText_Ngay.getText())==true)
+                                          JOptionPane.showMessageDialog(null, "Ngày Sinh: phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
+            else
+                                    if(this.jText_Ngay.getText().length() == 0)
+                                             JOptionPane.showMessageDialog(null,"Ngày Sinh: ngày sinh không được để trống!","Thông báo lỗi!", 1);
+            else
+                                       if(this.jText_Email.getText().length() == 0)
+                                               JOptionPane.showMessageDialog(null,"Mail không được để trống!","Thông báo lỗi!", 1);
+            else
+                                          if(this.jText_Dia.getText().length() == 0)
+                                                  JOptionPane.showMessageDialog(null,"Địa chỉ không được để trống!","Thông báo lỗi!", 1);
             else                            
                 updateData();            
             jbtn_them.setEnabled(true);

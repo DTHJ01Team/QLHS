@@ -11,8 +11,7 @@ package Process;
  */
 public class checkSymbol {
    public static char[] syb={'~','!','@','#','$','%','^','&','*'};
-    public static char[] num={'1','2','3','4','5','6','7','8','9'};
-    
+   public static char[] num={'1','2','3','4','5','6','7','8','9'}; 
     public static Boolean checkSb(String s)
     {
         boolean b=false;

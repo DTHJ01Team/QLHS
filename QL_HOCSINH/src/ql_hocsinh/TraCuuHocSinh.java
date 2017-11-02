@@ -183,7 +183,7 @@ public class TraCuuHocSinh extends javax.swing.JInternalFrame {
 
     private void jbtn_timActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_timActionPerformed
          if(this.jTextField_ten.getText().length() == 0)
-                                JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
+                                JOptionPane.showMessageDialog(null,"Họ tên học sinh không được để trống!","Thông báo lỗi!", 1);
             else
                          if(checkSymbol.checkSb(this.jTextField_ten.getText())==true)
                                       JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);

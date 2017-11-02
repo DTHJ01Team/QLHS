@@ -186,7 +186,7 @@ public class Thaydoidotuoi extends javax.swing.JFrame {
         // TODO add your handling code here:
         jText_tt.setEnabled(false);
         jText_td.setEnabled(false);
-        if(flag == 1){
+        if(flag == 1){            
             TMIN_UpdateData();
             TMAX_UpdateData();                
             jbtn_sua.setEnabled(true);

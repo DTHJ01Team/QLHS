@@ -414,11 +414,9 @@ public class Thaydoisiso extends javax.swing.JFrame implements ActionListener{
     private void jbtn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_luuActionPerformed
         // TODO add your handling code here:
         if(flag == 1){
-            if(jTable1.getRowCount()< DK){
-                InsertData();
-            } else{
+            if(jTable1.getRowCount() >= DK)
                 JOptionPane.showMessageDialog(this,"Vượt quá số lượng lớp đăng ký!\n Vui lòng xem lại quy định!");
-            }
+            else
                 if(this.jText_lop.getText().length() == 0)
                                 JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
             else
@@ -433,7 +431,7 @@ public class Thaydoisiso extends javax.swing.JFrame implements ActionListener{
             else
                              if(checkSymbol.checkNum(this.jText_ss.getText())==false)
                            JOptionPane.showMessageDialog(null, "Phát hiện có ký tự-không phải là số!","Thông báo lỗi!", 1);
-            else                            
+            else
                 InsertData();
             jbtn_them.setEnabled(true);
             jbtn_xoa.setEnabled(true);

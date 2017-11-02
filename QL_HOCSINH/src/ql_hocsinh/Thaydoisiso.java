@@ -418,13 +418,13 @@ public class Thaydoisiso extends javax.swing.JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(this,"Vượt quá số lượng lớp đăng ký!\n Vui lòng xem lại quy định!");
             else
                 if(this.jText_lop.getText().length() == 0)
-                                JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
+                                JOptionPane.showMessageDialog(null,"Tên lớp không được để trống!","Thông báo lỗi!", 1);
             else
                          if(checkSymbol.checkSb(this.jText_lop.getText())==true)
                                       JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
             else
                              if(this.jText_ss.getText().length() == 0)
-                                JOptionPane.showMessageDialog(null,"Tên học sinh không được để trống!","Thông báo lỗi!", 1);
+                                JOptionPane.showMessageDialog(null,"Số lượng không được để trống!","Thông báo lỗi!", 1);
             else
                          if(checkSymbol.checkSb(this.jText_ss.getText())==true)
                                       JOptionPane.showMessageDialog(null, "Phát hiện có ký tự đặc biệt!","Thông báo lỗi!", 1);
